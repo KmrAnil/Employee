@@ -1,13 +1,13 @@
-package com.instep.candidate;
+package com.cic.employee;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CandidateApplication {
+public class EmployeeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CandidateApplication.class, args);
+		SpringApplication.run(EmployeeApplication.class, args);
 	}
 
 }

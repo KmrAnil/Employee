@@ -1,10 +1,10 @@
-package com.instep.candidate;
+package com.cic.employee;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CandidateApplicationTests {
+class EmployeeApplicationTests {
 
 	@Test
 	void contextLoads() {
