@@ -12,8 +12,8 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Employee Service Endpoints")
-                        .description("Employee API")
+                .info(new Info().title("Employee API Documentation")
+                        .description("API Documentation for Employee service")
                         .version("1.0"));
     }
 }
