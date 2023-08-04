@@ -10,7 +10,7 @@ public class EmployeeConverter {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setName(employee.getName());
         employeeEntity.setEmail(employee.getEmail());
-        employeeEntity.setDept(employee.getEmail());
+        employeeEntity.setDepartment(employee.getDepartment());
         return employeeEntity;
     }
 
@@ -18,7 +18,7 @@ public class EmployeeConverter {
         Employee employee = new Employee();
         employee.setName(employeeEntity.getName());
         employee.setEmail(employeeEntity.getEmail());
-        employee.setDepartment(employeeEntity.getEmail());
+        employee.setDepartment(employeeEntity.getDepartment());
         return employee;
     }
 }

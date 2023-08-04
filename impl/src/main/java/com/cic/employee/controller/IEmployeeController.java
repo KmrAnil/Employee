@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * This {@link IEmployeeController} interface define the rest end point to perform Employee crud operation
  *
@@ -60,4 +62,14 @@ public interface IEmployeeController {
     })
     @DeleteMapping("delete/{email}")
     String deleteEmployee(@PathVariable String email);
+
+    @Operation(summary = "Employee detail update API",
+            description = "This API is used to update employee detail")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Employee detail updated"),
+            @ApiResponse(responseCode = "400", description = "Invalid Employee detail"),
+            @ApiResponse(responseCode = "404", description = "Resource not found")
+    })
+    @PatchMapping("/update-detail")
+    String updateEmployeeDetail(@RequestBody Map<String,String> employee);
 }

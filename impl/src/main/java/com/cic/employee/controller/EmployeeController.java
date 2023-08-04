@@ -6,6 +6,8 @@ import com.cic.employee.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 import static java.util.Objects.requireNonNull;
 
 @RestController
@@ -36,5 +38,10 @@ public class EmployeeController implements IEmployeeController{
     @Override
     public String deleteEmployee(String email) {
         return employeeService.deleteEmployee(email);
+    }
+
+    @Override
+    public String updateEmployeeDetail(Map<String,String> employee) {
+        return employeeService.updateEmployeeDetail(employee);
     }
 }
