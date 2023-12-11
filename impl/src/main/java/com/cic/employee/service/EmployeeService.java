@@ -6,13 +6,17 @@ import com.cic.employee.dto.Employee;
 import com.cic.employee.entity.EmployeeEntity;
 import com.cic.employee.repo.EmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
+@Slf4j
 @Service
 public class EmployeeService implements IEmployeeService{
 
@@ -35,25 +39,36 @@ public class EmployeeService implements IEmployeeService{
     }
 
     @Override
-    public String createEmployee(Employee employee) {
-        employeeRepository.save(employeeConverter.convertToEntity(employee));
-        return "Employ Detail Added";
+    public Integer createEmployee(Employee employee) {
+        EmployeeEntity employeeEntity = employeeRepository.save(employeeConverter.convertToEntity(employee));
+        return employeeEntity.getId();
     }
 
     @Override
-    public Employee getEmployee(String email) {
-        return employeeConverter.convertToDTO(employeeRepository.findByEmail(email));
+    @CircuitBreaker(name = "employeeService", fallbackMethod = "getEmployeeFallBack")
+    public Employee getEmployee(Integer empId) {
+        Optional<EmployeeEntity> employee = employeeRepository.findById(empId);
+        if(employee.isPresent())
+            return employeeConverter.convertToDTO(employee.get());
+        else
+            throw new RuntimeException("Employee Not Found");
+    }
+
+    public Employee getEmployeeFallBack(Integer empId, Throwable throwable){
+        log.info("In log back method");
+        throw new RuntimeException("Employee get api call failed - "+throwable.getMessage(),throwable);
     }
 
     @Override
     public String updateEmployee(Employee employee) {
-        //TODO: update only 1-2 parameter
+        employeeRepository.save(employeeConverter.convertToEntity(employee));
         return null;
     }
 
     @Override
-    public String deleteEmployee(String empId) {
-        return null;
+    public String deleteEmployee(Integer empId) {
+        employeeRepository.deleteById(empId);
+        return "Detail Removed";
     }
 
     @Override
@@ -67,6 +82,6 @@ public class EmployeeService implements IEmployeeService{
         cloneEmployeeEntity = objectMapper.convertValue(oldMap,EmployeeEntity.class);
         ;
         employeeRepository.save(employeeUtility.copyEmployeeDetail(cloneEmployeeEntity,employeeEntity));
-        return "Data updated";
+        return "Detail updated";
     }
 }

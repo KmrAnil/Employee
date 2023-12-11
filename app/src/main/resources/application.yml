@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    username: postgres
+    password: admin
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema = employee
+    driverClassName: org.postgresql.Driver
+  flyway:
+    locations:classpath:db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    
+server:
+  port: 8080
+  servlet:
+    contextPath: /employee
+
+    
+# Specify the path of the OpenAPI documentation
+springdoc:
+  api-docs:
+   path: /api-docs
+# Specify the path of the Swagger UI
+  swagger-ui:
+    path: /swagger-ui.html
+# Enable or disable Swagger UI
+    enabled: true
+
+
+
+#
+#resilience4j.circuitbreaker:
+#  instances:
+#    employeeService:
+#      failureRateThreshold: 50
+#      ringBufferSizeInClosedState: 5
+#      ringBufferSizeInHalfOpenSize: 3
+#      minimumNumberOfCalls : 3
+#      permittedNumberOfCallInHalfOpenState : 12
+#      slidingWindowSize : 5
+#      slidingWindowType : COUNT_BASED
+#      waitDurationInOpenState: 30s
+#      automaticTransitionFromOpenToHalfOpenEnabled : true

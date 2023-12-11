@@ -21,13 +21,13 @@ public class EmployeeController implements IEmployeeController{
     }
 
     @Override
-    public String createEmployee(Employee employee) {
+    public Integer createEmployee(Employee employee) {
         return employeeService.createEmployee(employee);
     }
 
     @Override
-    public Employee getEmployee(String email) {
-        return employeeService.getEmployee(email);
+    public Employee getEmployee(Integer empId) {
+        return employeeService.getEmployee(empId);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class EmployeeController implements IEmployeeController{
     }
 
     @Override
-    public String deleteEmployee(String email) {
-        return employeeService.deleteEmployee(email);
+    public String deleteEmployee(Integer empId) {
+        return employeeService.deleteEmployee(empId);
     }
 
     @Override

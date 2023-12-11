@@ -14,8 +14,8 @@ import java.util.Map;
  * <ul>
  *     <li>To add employee detail, use {@link #createEmployee(Employee)}</li>
  *     <li>To update employee detail, use {@link #updateEmployee(Employee)}</li>
- *     <li>To add employee detail, use {@link #getEmployee(String)}</li>
- *     <li>To add employee detail, use {@link #deleteEmployee(String)}</li>
+ *     <li>To add employee detail, use {@link #getEmployee(Integer)}</li>
+ *     <li>To add employee detail, use {@link #deleteEmployee(Integer)}</li>
  * </ul>
  *
  */
@@ -31,7 +31,7 @@ public interface IEmployeeController {
             @ApiResponse(responseCode = "404", description = "Resource not found")
     })
     @PostMapping("/create")
-    String createEmployee(@RequestBody Employee employee);
+    Integer createEmployee(@RequestBody Employee employee);
 
     @Operation(summary = "Employee detail get API",
             description = "This API is used to get employee detail")
@@ -40,8 +40,8 @@ public interface IEmployeeController {
             @ApiResponse(responseCode = "400", description = "Invalid Employee detail"),
             @ApiResponse(responseCode = "404", description = "Resource not found")
     })
-    @GetMapping("get/{email}")
-    Employee getEmployee(@PathVariable String email);
+    @GetMapping("get/{empId}")
+    Employee getEmployee(@PathVariable Integer empId);
 
     @Operation(summary = "Employee detail update API",
             description = "This API is used to update employee detail")
@@ -61,7 +61,7 @@ public interface IEmployeeController {
             @ApiResponse(responseCode = "404", description = "Resource not found")
     })
     @DeleteMapping("delete/{email}")
-    String deleteEmployee(@PathVariable String email);
+    String deleteEmployee(@PathVariable Integer emailId);
 
     @Operation(summary = "Employee detail update API",
             description = "This API is used to update employee detail")

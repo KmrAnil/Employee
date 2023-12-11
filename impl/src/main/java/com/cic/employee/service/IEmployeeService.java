@@ -5,13 +5,13 @@ import com.cic.employee.dto.Employee;
 import java.util.Map;
 
 public interface IEmployeeService {
-    String createEmployee(Employee employee);
+    Integer createEmployee(Employee employee);
 
-    Employee getEmployee(String email);
+    Employee getEmployee(Integer empId);
 
     String updateEmployee(Employee employee);
 
-    String deleteEmployee(String email);
+    String deleteEmployee(Integer empId);
 
     String updateEmployeeDetail(Map<String,String> employee);
 }
