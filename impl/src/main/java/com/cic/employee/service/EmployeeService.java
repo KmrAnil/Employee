@@ -1,10 +1,12 @@
 package com.cic.employee.service;
 
+import com.cic.employee.dto.Post;
 import com.cic.employee.util.EmployeeUtility;
 import com.cic.employee.converter.EmployeeConverter;
 import com.cic.employee.dto.Employee;
 import com.cic.employee.entity.EmployeeEntity;
 import com.cic.employee.repo.EmployeeRepository;
+import com.cic.employee.util.ExternalAPIUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +28,19 @@ public class EmployeeService implements IEmployeeService{
     private final EmployeeUtility employeeUtility;
     private final ObjectMapper objectMapper;
 
+    private final ExternalAPIUtil externalAPIUtil;
+
     @Autowired
     public EmployeeService(
             EmployeeRepository employeeRepository,
             EmployeeConverter employeeConverter,
             EmployeeUtility employeeUtility,
-            ObjectMapper objectMapper) {
+            ObjectMapper objectMapper, ExternalAPIUtil externalAPIUtil) {
         this.employeeRepository = requireNonNull(employeeRepository);
         this.employeeConverter = requireNonNull(employeeConverter);
         this.employeeUtility = requireNonNull(employeeUtility);
         this.objectMapper=requireNonNull(objectMapper);
+        this.externalAPIUtil = externalAPIUtil;
     }
 
     @Override
@@ -83,5 +88,10 @@ public class EmployeeService implements IEmployeeService{
         ;
         employeeRepository.save(employeeUtility.copyEmployeeDetail(cloneEmployeeEntity,employeeEntity));
         return "Detail updated";
+    }
+
+    @Override
+    public Post enternalAPICall(Integer postId) {
+        return externalAPIUtil.getPosts(postId);
     }
 }

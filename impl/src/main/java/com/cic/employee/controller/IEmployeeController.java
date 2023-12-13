@@ -1,6 +1,7 @@
 package com.cic.employee.controller;
 
 import com.cic.employee.dto.Employee;
+import com.cic.employee.dto.Post;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -72,4 +73,8 @@ public interface IEmployeeController {
     })
     @PatchMapping("/update-detail")
     String updateEmployeeDetail(@RequestBody Map<String,String> employee);
+
+    @GetMapping("test/get/{postId}")
+    Post enternalAPICall(@PathVariable Integer postId);
 }
+

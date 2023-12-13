@@ -2,6 +2,7 @@ package com.cic.employee.controller;
 
 
 import com.cic.employee.dto.Employee;
+import com.cic.employee.dto.Post;
 import com.cic.employee.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +44,10 @@ public class EmployeeController implements IEmployeeController{
     @Override
     public String updateEmployeeDetail(Map<String,String> employee) {
         return employeeService.updateEmployeeDetail(employee);
+    }
+
+    @Override
+    public Post enternalAPICall(Integer postId) {
+        return employeeService.enternalAPICall(postId);
     }
 }

@@ -2,6 +2,7 @@ package com.cic.employee.cucumber.steps;
 
 import com.cic.employee.controller.IEmployeeController;
 import com.cic.employee.cucumber.beans.EmployeeBean;
+import com.cic.employee.cucumber.config.MockServer;
 import com.cic.employee.dto.Employee;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,6 +19,9 @@ public class EmployeeSteps {
     private IEmployeeController iEmployeeController;
     @Autowired
     private EmployeeBean employeeBean;
+
+    @Autowired
+    private MockServer mockServer;
 
     @When("employee is created with name {string} department {string} and email {string}")
     public void employeeIsCreatedWithNameDepartmentAndEmail(String name, String department, String email) {
@@ -52,5 +56,14 @@ public class EmployeeSteps {
     @Then("delete the employee detail")
     public void deleteTheEmployeeWithEmail() {
         iEmployeeController.deleteEmployee(employeeBean.getEmpId());
+    }
+
+    @When("get post for id {int}")
+    public void getPostForId(int postId) {
+        Map<String,String> placeHolder = new HashMap<>();
+        placeHolder.put("POST_ID", String.valueOf(1));
+        placeHolder.put("TITLE","Title from placeholder");
+        mockServer.configure("POST_API","SUCCESS",placeHolder,1);
+        iEmployeeController.enternalAPICall(postId);
     }
 }

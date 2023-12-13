@@ -9,3 +9,6 @@ Feature: Employee crud operation testing
       | name   | department | email              |
       | "Anil" | "IT"       | "test12@gmail.com" |
       | "AK"   | "Civil"    | "test@gmail.com"   |
+
+  Scenario: Test Api mock binding
+    When get post for id 1

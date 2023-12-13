@@ -1,0 +1,16 @@
+{
+  "name": "Url Binding",
+  "bindings": {
+    "POST_API": {
+      "url": "https://jsonplaceholder.typicode.com/posts/${{POST_ID}}",
+      "httpMethod": "GET",
+      "mediaType" : "JSON",
+      "repetitions": 1,
+      "responses" : {
+        "DEFAULT" : "{\"message\":\"this is a default message\"}",
+        "SUCCESS": "{\n    \"id\": 1,\n    \"title\": \"${{TITLE}}\",\n    \"body\": \"mocked\",\n    \"userId\": 1\n}",
+        "ERROR":"{}"
+      }
+    }
+  }
+}
