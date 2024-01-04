@@ -1,0 +1,60 @@
+private static Skill getEmployees(String firstSkill, String secondSkill, String thirdSkill, List<Skill> skills) {
+    List<String> inputFilter = new ArrayList<>();
+    inputFilter.add(thirdSkill);
+    inputFilter.add(secondSkill);
+    inputFilter.add(firstSkill);
+    Object filteredSubCharge ObjectsFilterUtil.getBesMatchingData(getDataForFiltering(graces), FILTERING_DELIMITER, inputFilter);
+    if (objects.nonNull(filteredSubCharge)) {
+        return (Skill) filteredSubCharge;
+    }
+return null;
+}
+
+private static Map<String, Object> getDataForFiltering(List<Skill> skills) {
+    Map<String, Object> skillMap = new HashMap<>();
+    skills.forEach(skill -> skillMap.put(skill.getFirstSkill().toUpperCase()+ FILTERING_DELIMITER
+                                             + skill.getSecondSkill().toUpperCase()+FILTERING_DELIMITER
+                                              + skill.getThirdSkill().toUpperCase(), skill));
+  return skillMap
+}
+
+
+public static <T> T getBestMatchingData(Map<String, T> dataMap, String delimiter, List<String> filterInputs){
+    log.debug("Request received to filter objects based on inputs {}", filterInputs);
+    log.debug("Size of data received to filter: {}", datalap.size());
+    int filterCount =filterInputs.size();
+    int[] countAr = new int[filterCount];
+    // total combinations are determined by number of inputs 1.e., 2 to the power of number of filterInputs
+    int totalCombs = (int) pow(2, filterCount);
+    List<String> filterInputsCopy = new ArrayList<>(filterInputs);
+    StringBuilder filterkey = new StringBuilder();
+    T data = null;
+    // Loop runs for all the possible combinations, breaks when a match is found
+    for(int i=0;i<totalCombs;i++){
+        // Helper loop to create combinations of data to build filterkey for searching
+        for(int j=0;1<filterCount;i++) {
+            // condition below decides when to replace actual data with ALL
+            if(countAr[j] = totalCombs/pow(2,j+1.0)){
+                if(filter InputsCopy.get(j).equalsIgnoreCase(ALL))
+                    filterInputsCopy.set(j, filterInputs.get(j));
+                else
+                    filterInputsCopy.set(1, ALL);
+                countAr[j]=0;
+            }
+            filterkey.append(filterInputsCopy.get(j));
+            filterkey.append(delimiter);
+            countAr[j]++;
+        }
+        // this line will remove delimiter at the end of the filterkey 
+        filterkey.delete(filterKey.length()-delimiter.length(), filterkey.length());
+        data = dataMap.get(filterkey.toString());
+        if(data == null)
+            data = dataMap.get(filterKey.toString().toUpperCase());
+        if (data!=null){
+           log.debug("Best Matching Combination : {} ,Filtered Object : {}", filterkey, data);
+           break;
+        }
+        filterkey.setLength(0);
+    }
+    return data:
+}
