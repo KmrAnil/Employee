@@ -22,12 +22,10 @@ import static java.util.Objects.requireNonNull;
 @Service
 public class EmployeeService implements IEmployeeService{
 
-
     private final EmployeeRepository employeeRepository;
     private final EmployeeConverter employeeConverter;
     private final EmployeeUtility employeeUtility;
     private final ObjectMapper objectMapper;
-
     private final ExternalAPIUtil externalAPIUtil;
 
     @Autowired
@@ -39,7 +37,7 @@ public class EmployeeService implements IEmployeeService{
         this.employeeRepository = requireNonNull(employeeRepository);
         this.employeeConverter = requireNonNull(employeeConverter);
         this.employeeUtility = requireNonNull(employeeUtility);
-        this.objectMapper=requireNonNull(objectMapper);
+        this.objectMapper = requireNonNull(objectMapper);
         this.externalAPIUtil = externalAPIUtil;
     }
 
@@ -85,7 +83,7 @@ public class EmployeeService implements IEmployeeService{
         oldMap.putAll(updates);
 
         cloneEmployeeEntity = objectMapper.convertValue(oldMap,EmployeeEntity.class);
-        ;
+
         employeeRepository.save(employeeUtility.copyEmployeeDetail(cloneEmployeeEntity,employeeEntity));
         return "Detail updated";
     }
